@@ -119,4 +119,20 @@ fn main() {
 
     println!("{} {}", first_initial.is_uppercase(), emoji.is_uppercase());
     println!("{} {}", first_initial.is_lowercase(), emoji.is_lowercase());
+
+    // array
+    let numbers: [i32; 4] = [4, 6, 9, 10];
+    let apples = ["Granny Smith", "McIntosh", "Red Delicious"];
+    println!("array length: {}", apples.len());
+
+    let currency_rates: [f64; 0] = []; // empty box for array
+    let mut seasons = ["Spring", "Summer", "Autumn", "Winter"];
+
+    let first = seasons[0];
+    let second = seasons[1];
+
+    seasons[2] = "Fall";
+
+    println!("The first season is {first} and the second season is {second}");
+    println!("The Autumn changed to {}", seasons[2]);
 }
