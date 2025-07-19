@@ -143,4 +143,45 @@ fn main() {
     println!("{:?}", seasons); // array implements debug trait to show its contents
     println!("{seasons:?}"); // same as above
     println!("{seasons:#?}"); // pretty print
+
+    // debug macro
+    /*
+    dbg!(2 + 2);
+    dbg!(seasons);
+     */
+
+    // tuple
+    let employee = ("Molly", 32, "Marketing");
+
+    /*
+    let name = employee.0;
+    let age = employee.1;
+    let department = employee.2;
+    */
+    let (name, age, department) = employee;
+
+    println!("Name: {name}, age: {age}, department: {department}");
+    println!("{employee:#?}");
+
+    // range
+    let month_days = 1..31; // exclude the last
+    println!("{month_days:?}");
+    let week_days = 1..=7; // include the last
+    println!("{week_days:?}");
+
+    for number in month_days {
+        println!("{}", number * 2);
+    }
+
+    let letters = 'b'..'h';
+    println!("{letters:#?}");
+    for letter in letters {
+        println!("{letter}");
+    }
+
+    let colors = ["Red", "Green", "Blue"];
+
+    for color in colors {
+        println!("{color} is a great color!");
+    }
 }
