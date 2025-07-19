@@ -184,4 +184,8 @@ fn main() {
     for color in colors {
         println!("{color} is a great color!");
     }
+
+    // generic
+    let year_days: std::ops::Range<i16> = 1..365;
+    let alphabet: std::ops::Range<char> = 'a'..'f';
 }
