@@ -135,4 +135,12 @@ fn main() {
 
     println!("The first season is {first} and the second season is {second}");
     println!("The Autumn changed to {}", seasons[2]);
+
+    // display trait
+    println!("{}", 5);
+    println!("{}", 3.14);
+    println!("{}", true);
+    println!("{:?}", seasons); // array implements debug trait to show its contents
+    println!("{seasons:?}"); // same as above
+    println!("{seasons:#?}"); // pretty print
 }
