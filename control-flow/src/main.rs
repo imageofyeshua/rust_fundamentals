@@ -46,6 +46,7 @@ fn main() {
 
     let mut seconds = 24;
 
+    /*
     loop {
         if seconds <= 0 {
             println!("Blastoff!");
@@ -61,6 +62,21 @@ fn main() {
         println!("{seconds} seconds to blastoff...");
         seconds -= 1;
     }
+    */
+
+    while seconds > 0 {
+        if seconds % 2 == 0 {
+            println!("{seconds} seconds (even number), skipping 3 seconds...");
+            seconds -= 3;
+            continue;
+        }
+
+        println!("{seconds} seconds to blastoff...");
+        seconds -= 1;
+    }
+
+    println!("Blastoff!");
+
 }
 
 fn even_or_odd(number: i32) {
