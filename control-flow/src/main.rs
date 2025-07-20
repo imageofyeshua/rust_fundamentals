@@ -81,6 +81,27 @@ fn main() {
 
     countdown(5);
 
+    println!("Factorial: {}", factorial_iterative(5));
+    println!("Factorial: {}", factorial_recursive(5));
+}
+
+fn factorial_recursive(number: i32) -> i32 {
+    if number == 1 {
+        return 1;
+    }
+    number * factorial_recursive(number - 1)
+}
+
+fn factorial_iterative(number: i32) -> i32 {
+    let mut product = 1;
+    let mut count = number;
+
+    while count > 0 {
+        product *= count;
+        count -= 1;
+    }
+
+    product
 }
 
 fn countdown(seconds: i32) {
