@@ -77,6 +77,19 @@ fn main() {
 
     println!("Blastoff!");
 
+    // recursion
+
+    countdown(5);
+
+}
+
+fn countdown(seconds: i32) {
+    if seconds == 0 {
+        println!("Blastoff");
+    } else {
+        println!("{seconds} seconds to blastoff...");
+        countdown(seconds - 1);
+    }
 }
 
 fn even_or_odd(number: i32) {
