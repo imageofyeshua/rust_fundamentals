@@ -42,11 +42,11 @@ fn main() {
 
     // string &string, str &str
     /*
-        String - A dynamic piece of text stored on the heap at runtime
-        &String ("ref String") - A reference to a heap String
-        str - A hardcoded, read-only piece of text encoded in the binary
-        &str ("ref str") - A reference to the text in the memory that has loaded the binary file
-     */
+       String - A dynamic piece of text stored on the heap at runtime
+       &String ("ref String") - A reference to a heap String
+       str - A hardcoded, read-only piece of text encoded in the binary
+       &str ("ref str") - A reference to the text in the memory that has loaded the binary file
+    */
 
     // reference to executable binary [neither stack nor heap]
     // doesn't move ownership to copied reference
@@ -54,4 +54,23 @@ fn main() {
     let dessert = ice_cream;
     println!("{}", ice_cream);
     println!("{}", dessert);
+
+    // ownership movement example
+    let oranges = String::from("Oranges");
+    print_my_value(oranges);
+    // now the ownership of oranges moved to value in fn print_my_value()
+    // println!("{oranges} is still valid");
+
+    let burger = String::from("Burger");
+    add_fries(burger);
+}
+
+// the ownership is moved to meal
+fn add_fries(mut meal: String) {
+    meal.push_str(" and Fries");
+    println!("{meal}")
+}
+
+fn print_my_value(value: String) {
+    println!("Your value is {value}");
 }
