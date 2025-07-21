@@ -1,3 +1,4 @@
+#[allow(unused_variables)]
 fn main() {
     let mut words = String::new();
     words.push_str("Our Father in heaven...");
@@ -27,4 +28,27 @@ fn main() {
     let messenger = angel.clone();
     println!("Angel: {angel}");
     println!("Messenger: {messenger}");
+
+    // references and borrowing
+    let my_stack_value = 24;
+    let my_stack_reference = &my_stack_value;
+    println!("Stack value: {my_stack_reference}");
+    println!("Stack value: {}", *my_stack_reference);
+
+    let my_heap_value = String::from("Michael");
+    let my_heap_reference = &my_heap_value;
+    println!("Heap value: {my_heap_reference}");
+    println!("Heap value: {}", *my_heap_reference);
+
+    // string &string, str &str
+    /*
+        String - A dynamic piece of text stored on the heap at runtime
+        &String ("ref String") - A reference to a heap String
+        str - A hardcoded, read-only piece of text encoded in the binary
+        &str ("ref str") - A reference to the text in the memory that has loaded the binary file
+     */
+
+    // reference to executable binary [neither stack nor heap]
+    let ice_cream = "Cookies and Cream";
+    println!("{}", ice_cream);
 }
