@@ -49,6 +49,9 @@ fn main() {
      */
 
     // reference to executable binary [neither stack nor heap]
+    // doesn't move ownership to copied reference
     let ice_cream = "Cookies and Cream";
+    let dessert = ice_cream;
     println!("{}", ice_cream);
+    println!("{}", dessert);
 }
