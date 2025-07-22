@@ -63,6 +63,38 @@ fn main() {
 
     let burger = String::from("Burger");
     add_fries(burger);
+
+    // ownership is moved from cake in bake_cake() to cake in main
+    let cake = bake_cake();
+    println!("My cake: {cake}");
+
+    // example wrap-up
+    let is_concert = true;
+    let is_event = is_concert;
+    println!("{is_concert} : {is_event}");
+
+    // neither stack nor heap but executable binary copied just reference to string "Salmon"
+    let sushi = "Salmon";
+    let dinner = sushi;
+    println!("{sushi} : {dinner}");
+
+    // ownership movement from sushi to dinner for data in heap
+    let sushi = String::from("Salmon");
+    let dinner = sushi;
+
+    let fish = eat_meal(dinner);
+    println!("{fish}");
+}
+
+fn eat_meal(mut meal: String) -> String {
+    // the clear() method modifies a heap string to have no content
+    // meal.clear();
+    meal
+}
+
+fn bake_cake() -> String {
+    let cake = String::from("Baguette Wholemeal");
+    return cake;
 }
 
 // the ownership is moved to meal
