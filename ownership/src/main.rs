@@ -94,6 +94,12 @@ fn main() {
     let ref1 = &car;
     let ref2 = &car;
     println!("{ref1} and {ref2} and {}", &car);
+
+    // mutable references cannot co-exist in the same scope
+    let mut vehicle = String::from("Rearcar");
+    let ref3 = &mut vehicle;
+    // let ref4 = &mut vehicle;
+    // println!("{ref3} and {ref4}");
 }
 
 fn add_flour(meal: &mut String) {
