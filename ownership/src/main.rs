@@ -84,6 +84,24 @@ fn main() {
 
     let fish = eat_meal(dinner);
     println!("{fish}");
+
+    let mut current_meal = String::new();
+    add_flour(&mut current_meal);
+    show_my_meal(&current_meal);
+
+    // immutable reference
+    let car = String::from("Red");
+    let ref1 = &car;
+    let ref2 = &car;
+    println!("{ref1} and {ref2} and {}", &car);
+}
+
+fn add_flour(meal: &mut String) {
+    meal.push_str("Add flour");
+}
+
+fn show_my_meal(meal: &String) {
+    println!("Meal steps: {meal}");
 }
 
 fn eat_meal(mut meal: String) -> String {
