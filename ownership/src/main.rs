@@ -100,6 +100,72 @@ fn main() {
     let ref3 = &mut vehicle;
     // let ref4 = &mut vehicle;
     // println!("{ref3} and {ref4}");
+
+    let mut coffee = String::from("Mocha");
+    let a = &mut coffee;
+    println!("{a}");
+    let b = a; // ownership moves from a to b
+    println!("{b}"); // cannot access "a" here
+
+    let city = create_city();
+    println!("My city: {city}");
+
+    // arrays and tuples
+    let registrations = [true, false, true];
+    let first = registrations[0]; // copy traits
+    println!("{first} and {registrations:?}");
+
+    let languages = [String::from("Rust"), String::from("JavaScript")];
+    // partial ownership movement prohibited here
+    // let first = languages[0]; 
+    // let first = languages[0].clone();
+    let first = &languages[0]; // borrowing reference
+    println!("{first} and {languages:?}");
+
+    let signup = (true, "Daniel", 56);
+    let first = signup.0; // copy traits
+    println!("{first} and {signup:?}");
+
+    let frameworks = (String::from("C++"), String::from("Rust"));
+    let first = &frameworks.0; // borrowing reference
+    println!("{first} and {frameworks:?}");
+
+    // exercise
+    let mut trip = start_trip();
+    visit_seoul(&mut trip);
+    trip.push_str(" and ");
+    visit_gimcheon(&mut trip);
+    trip.push_str(" and ");
+    visit_busan(&mut trip);
+    trip.push_str(".");
+    show_itinerary(&trip);
+}
+
+fn start_trip() -> String {
+    String::from("The plan is...")
+}
+
+fn visit_seoul(trip: &mut String) {
+    trip.push_str("Seoul");
+}
+
+fn visit_gimcheon(trip: &mut String) {
+    trip.push_str("Gimcheon");
+}
+
+fn visit_busan(trip: &mut String) {
+    trip.push_str("Busan");
+}
+
+fn show_itinerary(trip : &String) {
+    println!("{trip}");
+}
+
+fn create_city() -> String {
+    String::from("Gimcheon")
+    // let city = String::from("New York");
+    // dangling referece if you return &city
+    // city
 }
 
 fn add_flour(meal: &mut String) {
