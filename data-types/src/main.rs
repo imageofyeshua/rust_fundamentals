@@ -188,4 +188,22 @@ fn main() {
     // generic
     let year_days: std::ops::Range<i16> = 1..365;
     let alphabet: std::ops::Range<char> = 'a'..'f';
+
+    // parse
+    let guess: u32 = "32".parse().expect("Not a number");
+    println!("Guess: {guess}");
+
+    // scalar types : integers, floating-point numbers, booleans, and characters
+    // - integer types : i8 / u8, i16 / u16, i32 / u32, i64 / u64, i128 / u128, isize / usize
+    /* - integer literals example
+            Decimal        : 98_222  
+            Hex            : 0xff
+            Octal          : 0o77
+            Binary         : 0b1111_0000
+            Byte (u8 only) : b'A'
+    */
+    // - floating point types : f64, f32
+    // - boolean types : true, false
+
+    // compound types : tuples and arrays
 }
