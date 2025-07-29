@@ -5,7 +5,7 @@ fn main() {
     let string_reference = &bible_hero;
     println!("{string_reference}");
 
-    let first_name = &bible_hero[0..6]; // byte range
+    let first_name = &bible_hero[0..6]; // byte range same as &bile_hero[..6]
     let last_name = &bible_hero[7..11]; // each byte represents a character
     println!("{first_name} {last_name}");
 
@@ -19,6 +19,17 @@ fn main() {
     println!("length: {}", food.len());
     let fruit_slice = &food[0..3];
     println!("length: {}", fruit_slice.len());
+    let full_name = &food[..];
+    println!("full name: {}", full_name);
     let smile = "😊";
     println!("emoji length: {}", smile.len()); // emoji occupies 4-bytes which cannot be sliced
+
+    let action_hero = String::from("Brad Pitt");
+    do_hero_stuff(&action_hero); // &String -> &str : OK however, &str -> &String : NG
+    let another_action_hero = "King Slayer";
+    do_hero_stuff(another_action_hero);
+}
+
+fn do_hero_stuff(hero_name: &str) {
+    println!("{hero_name} saves the day!");
 }
