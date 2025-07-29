@@ -28,6 +28,27 @@ fn main() {
     do_hero_stuff(&action_hero); // &String -> &str : OK however, &str -> &String : NG
     let another_action_hero = "King Slayer";
     do_hero_stuff(another_action_hero);
+
+    let values = [4, 8, 15, 16, 23, 42];
+
+    let my_slice = &values[0..3];
+    println!("{my_slice:?}");
+
+    let my_slice = &values[..];
+    println!("{my_slice:?}");
+
+    let my_slice = &values; // borrowing full reference
+    println!("{my_slice:?}");
+
+    let regular_reference = &values;
+    print_length(regular_reference);
+
+    let slice_of_three = &values[..3];
+    print_length(slice_of_three);
+}
+
+fn print_length(reference: &[i32]) {
+    println!("{}", reference.len());
 }
 
 fn do_hero_stuff(hero_name: &str) {
