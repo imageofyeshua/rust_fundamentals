@@ -27,7 +27,7 @@ fn main() {
     match season {
         "summer" => println!("School's out!"),
         "winter" => println!("Brr, so cold!"),
-        _ => println!("Lots of rain!")
+        _ => println!("Lots of rain!"),
     }
 
     let number = 10;
@@ -35,7 +35,7 @@ fn main() {
     match number {
         2 | 4 | 6 | 8 => println!("{number} is even"),
         1 | 3 | 5 | 9 => println!("{number} is odd"),
-        _ => println!("{number} is out of boundary")
+        _ => println!("{number} is out of boundary"),
     }
 
     match number {
@@ -77,12 +77,63 @@ fn main() {
 
     println!("Blastoff!");
 
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
+
+    while index < a.len() {
+        println!("The value is : {}", a[index]);
+        index += 1;
+    }
+
+    for element in a {
+        println!("The value is : {element}");
+    }
+
     // recursion
 
     countdown(5);
 
     println!("Factorial: {}", factorial_iterative(5));
     println!("Factorial: {}", factorial_recursive(5));
+
+    let condition = true;
+    let number = if condition { 5 } else { 6 };
+    println!("The value of number is {number}");
+
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 3;
+        }
+    };
+
+    println!("The result is {result}");
+
+    // loop inside loop with loop label
+    let mut count = 0;
+    'counting_up: loop {
+        println!("count = {count}");
+        let mut remaining = 10;
+
+        loop {
+            println!("remaining = {remaining}");
+
+            if remaining == 9 {
+                break;
+            }
+
+            if count == 2 {
+                break 'counting_up;
+            }
+
+            remaining -= 1;
+        }
+        count += 1;
+    }
+    println!("End count: {count}");
 }
 
 fn factorial_recursive(number: i32) -> i32 {
