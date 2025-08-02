@@ -45,6 +45,24 @@ fn main() {
 
     let slice_of_three = &values[..3];
     print_length(slice_of_three);
+
+    let mut s = String::from("Our Father in Heaven");
+
+    let word = first_word(&s);
+    println!("first word size: {word}");
+
+    s.clear(); // this empties the String, making it equal to ""
+}
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
 }
 
 fn print_length(reference: &[i32]) {
