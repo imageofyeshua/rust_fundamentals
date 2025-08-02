@@ -1,3 +1,5 @@
+use std::io;
+
 #[allow(unused_variables)]
 fn main() {
     let eight_bit: i8 = -112;
@@ -152,6 +154,11 @@ fn main() {
 
     // tuple
     let employee = ("Molly", 32, "Marketing");
+    let x: (i32, f64, u8) = (500, 6.4, 1);
+
+    let five_hundred = x.0;
+    let six_point_four = x.1;
+    let one = x.2;
 
     /*
     let name = employee.0;
@@ -179,11 +186,16 @@ fn main() {
         println!("{letter}");
     }
 
+    // array
     let colors = ["Red", "Green", "Blue"];
 
     for color in colors {
         println!("{color} is a great color!");
     }
+
+    let a: [i32; 5] = [1, 2, 3, 4, 5];
+    let a = [3; 5];
+    println!("array a: {a:?}");
 
     // generic
     let year_days: std::ops::Range<i16> = 1..365;
@@ -193,10 +205,31 @@ fn main() {
     let guess: u32 = "32".parse().expect("Not a number");
     println!("Guess: {guess}");
 
+    /*
+    let myarr = [1, 2, 3, 4, 5];
+
+    println!("Please enter an array index.");
+
+    let mut index = String::new();
+
+    io::stdin()
+        .read_line(&mut index)
+        .expect("Failed to read line");
+
+    let index: usize = index
+        .trim()
+        .parse()
+        .expect("Index entered was not a number");
+
+    let element = myarr[index];
+
+    println!("The value of the element at index {index} is: {element}");
+    */
+
     // scalar types : integers, floating-point numbers, booleans, and characters
     // - integer types : i8 / u8, i16 / u16, i32 / u32, i64 / u64, i128 / u128, isize / usize
     /* - integer literals example
-            Decimal        : 98_222  
+            Decimal        : 98_222
             Hex            : 0xff
             Octal          : 0o77
             Binary         : 0b1111_0000
@@ -206,4 +239,16 @@ fn main() {
     // - boolean types : true, false
 
     // compound types : tuples and arrays
+
+    print_labeled_measurement(5, 'h');
+
+    let x = plus_one(5);
+    println!("The value of x is {x}");
+}
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn print_labeled_measurement(value: i32, unit_label: char) {
+    println!("The measurement is {value}{unit_label}");
 }
