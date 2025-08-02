@@ -127,7 +127,7 @@ fn main() {
 
     let languages = [String::from("Rust"), String::from("JavaScript")];
     // partial ownership movement prohibited here
-    // let first = languages[0]; 
+    // let first = languages[0];
     // let first = languages[0].clone();
     let first = &languages[0]; // borrowing reference
     println!("{first} and {languages:?}");
@@ -166,11 +166,43 @@ fn main() {
     // returning ownership of parameters
     let s1 = String::from("hello");
 
-    let (s2, len) = calculate_length(s1);
+    let len = calculate_length(&s1); // borrwoing
+    println!("The length of '{s1}' is {len}.");
 
+    let (s2, len) = calculate_length_first(s1); // s1's ownership moved
     println!("The length of '{s2}' is {len}.");
+
+    let mut s = String::from("hello");
+
+    change(&mut s);
+
+    {
+        let r1 = &mut s;
+    }
+    // let r2 = &mut s; >> no multiple mutable references
+    let r2 = &mut s;
+
+    let r1 = &s;
+    let r2 = &s;
+    // let r3 = &mut s; // cannot combine mutable and immutable references
+
+    let reference_to_string = no_dangle();
 }
-fn calculate_length(s: String) -> (String, usize) {
+fn no_dangle() -> String {
+    let s = String::from("hello");
+
+    s
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+
+fn calculate_length_first(s: String) -> (String, usize) {
     let length = s.len(); // len() returns the length of a String
 
     (s, length)
@@ -209,7 +241,7 @@ fn visit_busan(trip: &mut String) {
     trip.push_str("Busan");
 }
 
-fn show_itinerary(trip : &String) {
+fn show_itinerary(trip: &String) {
     println!("{trip}");
 }
 
