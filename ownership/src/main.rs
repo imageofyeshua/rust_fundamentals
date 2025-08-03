@@ -1,5 +1,15 @@
 #[allow(unused_variables)]
 fn main() {
+    // stack-only copy
+    let x = 5;
+    let y = x;
+    println!("x = {x}, y = {y}");
+
+    // types implement copy
+    // integer types such as u32
+    // boolean types, floating-point types, character type
+    // and tuples if they only contain types that also implement copy
+
     let mut words = String::new();
     words.push_str("Our Father in heaven...");
     // name holds reference, length(bytes) and capacity(bytes) to heap
@@ -139,6 +149,48 @@ fn main() {
     visit_busan(&mut trip);
     trip.push_str(".");
     show_itinerary(&trip);
+
+    let s = String::from("hell");
+    takes_ownership(s);
+    // println!("{s}"); // accessing s is no longer valid here
+
+    let x = 5;
+    makes_copy(x);
+
+    let s1 = gives_ownership();
+
+    let s2 = String::from("hello");
+
+    let s3 = takes_and_gives_back(s2);
+
+    // returning ownership of parameters
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of '{s2}' is {len}.");
+}
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+
+    (s, length)
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
+}
+
+fn gives_ownership() -> String {
+    let some_string = String::from("yours");
+    some_string
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("copied integer: {some_integer}");
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{some_string}");
 }
 
 fn start_trip() -> String {
@@ -176,7 +228,7 @@ fn show_my_meal(meal: &String) {
     println!("Meal steps: {meal}");
 }
 
-fn eat_meal(mut meal: String) -> String {
+fn eat_meal(meal: String) -> String {
     // the clear() method modifies a heap string to have no content
     // meal.clear();
     meal
