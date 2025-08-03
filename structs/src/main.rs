@@ -5,6 +5,12 @@ struct User {
     sign_in_count: u64,
 }
 
+struct Coffee {
+    price: f64,
+    name: String,
+    is_hot: bool,
+}
+
 struct Color(i32, i32, i32);
 struct Point(i32, i32, i32);
 

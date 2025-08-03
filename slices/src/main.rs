@@ -46,12 +46,45 @@ fn main() {
     let slice_of_three = &values[..3];
     print_length(slice_of_three);
 
+    let mut my_array = [10, 15, 20, 25, 30];
+    let my_slice = &mut my_array[2..4];
+    println!("My slice: {:?}", my_slice);
+
+    my_slice[0] = 100;
+    println!("My slice: {:?}", my_slice);
+    println!("My array: {:?}", my_array);
+
     let mut s = String::from("Our Father in Heaven");
 
     let word = first_word(&s);
     println!("first word size: {word}");
 
     s.clear(); // this empties the String, making it equal to ""
+
+    // code challenge
+    let mut cereals = [
+        String::from("Cookie Crisp"),
+        String::from("Cinnamon Toast Crunch"),
+        String::from("Frosted Flakes"),
+        String::from("Cocoa Puffs"),
+        String::from("Captain Crunch"),
+    ];
+
+    let first_two =  &cereals[0..2];
+    println!("{first_two:?}");
+
+    let mid_three = &cereals[1..];
+    println!("{mid_three:?}");
+
+    let last_three = &mut cereals[2..];
+    println!("{last_three:?}");
+
+    last_three[2] = String::from("Lucky Charms");
+    println!("{cereals:?}");
+
+    let cookie_crisp = &cereals[0];
+    let cookie = &cookie_crisp[0..6];
+    println!("{cookie}");
 }
 fn first_word(s: &String) -> &str {
     let bytes = s.as_bytes();
