@@ -36,6 +36,16 @@ fn main() {
 
     let coffee = make_coffee(String::from("Latte"), 4.99, true);
 
+    let caramel_macchiato = Coffee { 
+        name: String::from("Caramel Macchiato"),
+        ..coffee  // copy the price and is_hot from coffee
+    };
+
+    let latte = Coffee {
+        name: coffee.name.clone(), // copy the name from coffee, no ownership movement
+        ..coffee
+    };
+
     println!("My {} this morning cost {}, It is {} that it was hot", coffee.name, coffee.price, coffee.is_hot);
 
     let mut user1 = User {
