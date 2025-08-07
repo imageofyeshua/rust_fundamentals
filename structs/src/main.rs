@@ -25,15 +25,20 @@ struct HosannaSong {
 }
 
 impl HosannaSong {
+    // Immutable struct value (self parameter takes ownership)
     fn display_song_info(self) {
-        // Immutable struct value (self parameter takes ownership)
-        // Mutable struct value (self parameter takes ownership, has permission to mutate)
-        // Immutable reference to the struct instance (no ownership moved)
-        // Mutable reference to the struct instance (no ownership moved, have permission to mutate)
         println!("Title: {}", self.title);
         println!("Release Year: {}", self.release_year);
         println!("Duration: {}", self.duration_secs);
     }
+    // Mutable struct value (self parameter takes ownership, has permission to mutate)
+    fn double_length(mut self) {
+        self.duration_secs = self.duration_secs * 2;
+        println!("{:#?}", self);
+    }
+    // Immutable reference to the struct instance (no ownership moved)
+    
+    // Mutable reference to the struct instance (no ownership moved, have permission to mutate)
 }
 
 #[allow(unused_variables)]
@@ -86,9 +91,10 @@ fn main() {
         duration_secs: 240
     };
 
-    song.display_song_info();
-
+    // song.display_song_info();
     // println!("{}", song.title); >> display_song_info() took the ownership of song instance above
+
+    song.double_length();
 
     let mut user1 = User {
         active: true,
