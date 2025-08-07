@@ -37,8 +37,17 @@ impl HosannaSong {
         println!("{:#?}", self);
     }
     // Immutable reference to the struct instance (no ownership moved)
+    fn display_song_info_ref(&self) {
+        println!("Title: {}", self.title);
+        println!("Release Year: {}", self.release_year);
+        println!("Duration: {}", self.duration_secs);
+    }
     
     // Mutable reference to the struct instance (no ownership moved, have permission to mutate)
+    fn double_length_ref(&mut self) {
+        self.duration_secs = self.duration_secs * 2;
+        println!("{:#?}", self);
+    }
 }
 
 #[allow(unused_variables)]
@@ -85,7 +94,7 @@ fn main() {
     println!("{:?}", latte);
     println!("{:#?}", latte);
 
-    let song = HosannaSong {
+    let mut song = HosannaSong {
         title: String::from("He is coming, again!"),
         release_year: 2022,
         duration_secs: 240
@@ -93,8 +102,11 @@ fn main() {
 
     // song.display_song_info();
     // println!("{}", song.title); >> display_song_info() took the ownership of song instance above
+    // song.double_length();
 
-    song.double_length();
+    // immutable & mutable reference don't move ownership around
+    song.display_song_info_ref();
+    song.double_length_ref();
 
     let mut user1 = User {
         active: true,
