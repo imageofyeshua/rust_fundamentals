@@ -32,7 +32,9 @@ impl HosannaSong {
             duration_secs,
         }
     }
+}
 
+impl HosannaSong {
     // Immutable struct value (self parameter takes ownership)
     fn display_song_info(self) {
         println!("Title: {}", self.title);
