@@ -17,6 +17,25 @@ struct Coffee {
     is_hot: bool,
 }
 
+#[derive(Debug)]
+struct HosannaSong {
+    title: String,
+    release_year: u32,
+    duration_secs: u32,
+}
+
+impl HosannaSong {
+    fn display_song_info(self) {
+        // Immutable struct value (self parameter takes ownership)
+        // Mutable struct value (self parameter takes ownership, has permission to mutate)
+        // Immutable reference to the struct instance (no ownership moved)
+        // Mutable reference to the struct instance (no ownership moved, have permission to mutate)
+        println!("Title: {}", self.title);
+        println!("Release Year: {}", self.release_year);
+        println!("Duration: {}", self.duration_secs);
+    }
+}
+
 #[allow(unused_variables)]
 fn main() {
     let mut beverage = Coffee {
@@ -60,6 +79,16 @@ fn main() {
 
     println!("{:?}", latte);
     println!("{:#?}", latte);
+
+    let song = HosannaSong {
+        title: String::from("He is coming, again!"),
+        release_year: 2022,
+        duration_secs: 240
+    };
+
+    song.display_song_info();
+
+    // println!("{}", song.title); >> display_song_info() took the ownership of song instance above
 
     let mut user1 = User {
         active: true,
