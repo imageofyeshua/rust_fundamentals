@@ -25,6 +25,14 @@ struct HosannaSong {
 }
 
 impl HosannaSong {
+    fn new(title: String, release_year: u32, duration_secs: u32) -> Self {
+        Self {
+            title,
+            release_year,
+            duration_secs,
+        }
+    }
+
     // Immutable struct value (self parameter takes ownership)
     fn display_song_info(self) {
         println!("Title: {}", self.title);
@@ -113,6 +121,10 @@ fn main() {
         release_year: 2025,
         duration_secs: 245,
     };
+
+    let amen = HosannaSong::new(String::from("Amen"), 2024, 420);
+
+    amen.display_song_info_ref();
 
     if praise_him.is_longer_than(&praise_him) {
         println!("{} is longer than {}", again.title, praise_him.title);
