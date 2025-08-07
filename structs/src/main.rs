@@ -48,6 +48,10 @@ impl HosannaSong {
         self.duration_secs = self.duration_secs * 2;
         println!("{:#?}", self);
     }
+
+    fn is_longer_than(&self, other: &Self) -> bool {
+        self.duration_secs > other.duration_secs
+    }
 }
 
 #[allow(unused_variables)]
@@ -94,19 +98,31 @@ fn main() {
     println!("{:?}", latte);
     println!("{:#?}", latte);
 
-    let mut song = HosannaSong {
+    let mut again = HosannaSong {
         title: String::from("He is coming, again!"),
         release_year: 2022,
         duration_secs: 240
     };
 
-    // song.display_song_info();
-    // println!("{}", song.title); >> display_song_info() took the ownership of song instance above
-    // song.double_length();
+    let praise_him = HosannaSong {
+        title: String::from("Praise Him"),
+        release_year: 2025,
+        duration_secs: 245,
+    };
+
+    if praise_him.is_longer_than(&praise_him) {
+        println!("{} is longer than {}", again.title, praise_him.title);
+    } else {
+        println!("{} is shorter than {}", again.title, praise_him.title);
+    }
+
+    // again.display_song_info();
+    // println!("{}", again.title); >> display_song_info() took the ownership of song instance above
+    // again.double_length();
 
     // immutable & mutable reference don't move ownership around
-    song.display_song_info_ref();
-    song.double_length_ref();
+    again.display_song_info_ref();
+    again.double_length_ref();
 
     let mut user1 = User {
         active: true,
