@@ -18,6 +18,38 @@ struct Coffee {
 }
 
 #[derive(Debug)]
+struct Computer {
+    cpu: String,
+    memory: u32,
+    hard_drive_capacity: u32,
+}
+
+impl Computer {
+    fn new(cpu: String, memory: u32, hard_drive_capacity: u32) -> Self {
+        Self {
+            cpu,
+            memory,
+            hard_drive_capacity,
+        }
+    }
+
+    fn upgrade_cpu(&mut self, new_cpu: String) -> &mut Self {
+        self.cpu = new_cpu;
+        self
+    }
+
+    fn upgrade_memory(&mut self, new_memory: u32) -> &mut Self {
+        self.memory = new_memory;
+        self
+    }
+
+    fn upgrade_hard_drive_capacity(&mut self, new_capacity: u32) -> &mut Self {
+        self.hard_drive_capacity = new_capacity;
+        self
+    }
+}
+
+#[derive(Debug)]
 struct HosannaSong {
     title: String,
     release_year: u32,
@@ -142,6 +174,17 @@ fn main() {
     again.display_song_info_ref();
     again.double_length_ref();
 
+    let mut computer = Computer::new(String::from("M3 Max"), 54, 500);
+
+    // build pattern
+    computer
+        .upgrade_cpu(String::from("M4 Ultimate"))
+        .upgrade_memory(128)
+        .upgrade_hard_drive_capacity(1024);
+
+    println!("Stats: {computer:#?}");
+
+    /*
     let mut user1 = User {
         active: true,
         username: String::from("someusername123"),
@@ -164,6 +207,7 @@ fn main() {
 
     // unit struct
     let subject = AlwaysEqual;
+    */
 }
 
 fn make_coffee(name: String, price: f64, is_hot: bool) -> Coffee {
