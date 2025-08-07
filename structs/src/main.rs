@@ -10,6 +10,7 @@ struct Point(i32, i32, i32);
 
 struct AlwaysEqual;
 
+#[derive(Debug)] // debug trait to print struct
 struct Coffee {
     price: f64,
     name: String,
@@ -34,7 +35,7 @@ fn main() {
     let favorite_coffee = beverage.name;
     // println!("{}", mocha.name); >> does't work here
 
-    let coffee = make_coffee(String::from("Latte"), 4.99, true);
+    let mut coffee = make_coffee(String::from("Macha"), 4.99, true);
 
     let caramel_macchiato = Coffee { 
         name: String::from("Caramel Macchiato"),
@@ -47,6 +48,18 @@ fn main() {
     };
 
     println!("My {} this morning cost {}, It is {} that it was hot", coffee.name, coffee.price, coffee.is_hot);
+
+    drink_coffee(&mut coffee); // doesn't move ownership just reference borrowing to mutate data
+
+    println!("{} {}", coffee.name, coffee.price);
+
+    // debug trait
+    let values = ["hello", "world"];
+    println!("{:?}", values);
+    println!("{:#?}", values); // pretty version 
+
+    println!("{:?}", latte);
+    println!("{:#?}", latte);
 
     let mut user1 = User {
         active: true,
@@ -78,6 +91,12 @@ fn make_coffee(name: String, price: f64, is_hot: bool) -> Coffee {
         price,
         is_hot
     }
+}
+
+fn drink_coffee(coffee: &mut Coffee) {
+    println!("Drinking my delicious {}", coffee.name);
+    coffee.is_hot = false;
+    coffee.price = 10.99;
 }
 
 fn build_user(email: String, username: String) -> User {
