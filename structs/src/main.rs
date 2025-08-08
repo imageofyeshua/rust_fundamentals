@@ -10,6 +10,14 @@ struct Point(i32, i32, i32);
 
 struct AlwaysEqual;
 
+struct Empty;
+
+// tuple struct
+// hours and minues
+struct ShortDuration(u32, u32);
+// years and month
+struct LongDuration(u32, u32);
+
 #[derive(Debug)] // debug trait to print struct
 struct Coffee {
     price: f64,
@@ -100,6 +108,37 @@ impl HosannaSong {
     }
 }
 
+#[derive(Debug)]
+struct Flight {
+    origin: String,
+    destination: String,
+    price: f64,
+    passengers: u32
+}
+
+impl Flight {
+    fn new(origin: String, destination: String, price: f64, passengers: u32) -> Self {
+       Self {
+        origin,
+        destination,
+        price,
+        passengers
+       } 
+    }
+
+    fn change_destination(&mut self, new_destination: String) {
+        self.destination = new_destination;
+    }
+
+    fn increase_price(&mut self) {
+        self.price *= 1.2;
+    }
+
+    fn itinerary (&self) {
+        println!("{} -> {}", self.origin, self.destination);
+    }
+}
+
 #[allow(unused_variables)]
 fn main() {
     let mut beverage = Coffee {
@@ -184,6 +223,37 @@ fn main() {
 
     println!("Stats: {computer:#?}");
 
+    let work_shift = ShortDuration(8, 0);
+    println!("{} hours {} minutes", work_shift.0, work_shift.1);
+
+    let era = LongDuration(5, 3);
+    println!("{} years and {} months", era.0, era.1);
+
+    go_to_work(work_shift);
+
+    // a unit is an empty tuple, a tuple without values
+    let empty = ();
+    let my_empty_struct = Empty;
+
+    let mut my_flight = Flight::new(
+        String::from("New York"),
+        String::from("Los Angeles"),
+        299.99,
+        150,
+    );
+
+    println!("{:#?}", my_flight);
+    my_flight.change_destination(String::from("San Diego"));
+    my_flight.increase_price();
+    my_flight.itinerary();
+    println!("{:#?}", my_flight);
+
+    let another_flight = Flight {
+        origin: String::from("Paris"),
+        destination: String::from("Rome"),
+        ..my_flight
+    };
+    println!("{:#?}", another_flight);
     /*
     let mut user1 = User {
         active: true,
@@ -208,6 +278,10 @@ fn main() {
     // unit struct
     let subject = AlwaysEqual;
     */
+}
+
+fn go_to_work(length: ShortDuration) {
+    println!("Passing time {} hours and {} minutes", length.0, length.1);
 }
 
 fn make_coffee(name: String, price: f64, is_hot: bool) -> Coffee {
