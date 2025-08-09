@@ -12,10 +12,18 @@ struct Card {
 }
 
 #[derive(Debug)]
+struct Credentials {
+    username: String,
+    password: String,
+}
+
+#[derive(Debug)]
 enum PaymentMethodType {
     CreditCard(String),
     DebitCard(String),
-    PayPal(String, String),
+    PayPal(Credentials),
+    Cash,
+    Crypto {username: String, dna_code: String}
 }
 
 fn main() {
@@ -32,6 +40,18 @@ fn main() {
     println!("{:#?}", mastercard);
 
     let mut my_payment_method = PaymentMethodType::CreditCard(String::from("1234-5678-9876-5432"));
-    my_payment_method = PaymentMethodType::PayPal(String::from("bob@gmail.com"), String::from("anna@protonmail.com"));
-    println!("{:#?}", my_payment_method);
+
+    let paypel_credentials = Credentials {
+        username: String::from("bob@gmail.com"),
+        password: String::from("password"),
+    };
+
+    let paypal = PaymentMethodType::PayPal(paypel_credentials);
+    println!("{:#?}", paypal);
+
+    let crypto = PaymentMethodType::Crypto { 
+        username: String::from("Lucifer Satan"),
+        dna_code: String::from("messed-up-dna-leading-to-psycho-path"),
+    };
+    println!("{:#?}", crypto);
 }
