@@ -1,3 +1,91 @@
+use rand::Rng;
+use std::io;
+
+#[derive(Debug)]
+enum Emotion {
+   Calm,
+   Delighted,
+   Angry,
+   Excited,
+   Sad,
+   Stressed,
+   Worried
+}
+
+#[derive(Debug)]
+#[derive(PartialEq)]
+enum RPS {
+    Rock,
+    Paper,
+    Scissors
+}
+
+#[derive(Debug)]
+struct MeBot {
+    model: String,
+    birthday: String,
+    id: u32,
+    rps: RPS,
+    emotion: Emotion,
+    power_on: bool,
+}
+
+impl MeBot {
+    fn new(model: String, birthday: String, id: u32, rps: RPS, emotion: Emotion, power_on: bool) -> Self {
+       Self {
+        model,
+        birthday,
+        id,
+        rps,
+        emotion,
+        power_on
+       } 
+    }
+
+    fn new_rps(&mut self) -> &mut Self {
+        let rand_number = rand::rng().random_range(1..=3);
+        match rand_number {
+            1 => self.rps = RPS::Rock,
+            2 => self.rps = RPS::Paper,
+            3 => self.rps = RPS::Scissors,
+            _ => unreachable!()
+        }
+        self
+    }
+
+    fn say_model(&self) {
+        println!("model: {}", self.model);
+    }
+
+    fn say_emotion(&self) {
+        println!("emotion: {:?}", self.emotion);
+    }
+
+    fn say_rps(&self) {
+        println!("Mebot chose {:?}", self.rps);
+    }
+
+    fn update_emotion(&mut self, emotion: Emotion) -> &mut Self {
+        self.emotion = emotion;
+        println!("my emotion changed to {:?}", self.emotion);
+        self
+    }
+
+    fn update_model(&mut self, model: String) -> &mut Self {
+        self.model = model;
+        println!("my model changed to {:?}", self.model);
+        self
+    }
+
+    fn power_on(&mut self) {
+        if self.power_on == true {
+            println!("the power is already on!");
+            return;
+        }
+        self.power_on = true;
+    }
+}
+
 #[derive(Debug)]
 enum  CardSuit {
     Hearts,
@@ -54,4 +142,61 @@ fn main() {
         dna_code: String::from("messed-up-dna-leading-to-psycho-path"),
     };
     println!("{:#?}", crypto);
+
+    let mut daniel = MeBot::new(
+        String::from("D1-2025"),
+        String::from("2025-11-25"),
+        123545667,
+        RPS::Rock,
+        Emotion::Calm,
+        false
+    );
+
+    daniel.say_model();
+    daniel.power_on();
+    daniel.say_emotion();
+
+    daniel.update_model(String::from("D02-2030")).update_emotion(Emotion::Stressed);
+
+    println!("{:#?}", daniel);
+
+    println!("Let's play game with MeBot");
+
+    loop {
+        println!("Please choose from 1: Rock 2: Paper 3: Scissors");
+
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Wrong Input");
+
+        let guess : u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_)  => continue,
+        };
+
+        match guess {
+            1 => println!("You chose Rock"),
+            2 => println!("You chose Paper"),
+            3 => println!("You chose Scissors"),
+            _ => {
+                println!("You dumb ass! choose between 1 and 3");
+                continue
+            }
+        }
+
+        daniel.new_rps().say_rps();
+
+        if guess == 1 && daniel.rps == RPS::Scissors 
+            || guess == 2 && daniel.rps == RPS::Rock
+            || guess == 3 && daniel.rps == RPS::Paper
+         {
+            println!("You Won!");
+            break;
+        } else {
+            println!("You Lost!");
+        }
+    }
+
 }
