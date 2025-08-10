@@ -1,6 +1,7 @@
-use rand::Rng;
-use std::io;
+// use rand::Rng;
+// use std::io;
 
+/*
 #[derive(Debug)]
 enum Emotion {
    Calm,
@@ -113,8 +114,40 @@ enum PaymentMethodType {
     Cash,
     Crypto {username: String, dna_code: String}
 }
+*/
+
+#[derive(Debug)]
+enum Beans {
+    Pinto,
+    Black,
+}
+
+#[derive(Debug)]
+enum Meat {
+    Chicken,
+    Steak,
+}
+
+#[derive(Debug)]
+enum RestaurantItem {
+    Burrito{ meat: Meat, beans: Beans },
+    Bowl{ meat: Meat, beans: Beans },
+    VeganPlate,
+}
 
 fn main() {
+    let lunch = RestaurantItem::Burrito{
+        meat: Meat::Steak, 
+        beans: Beans::Pinto
+    };
+    let dinner = RestaurantItem::Bowl{
+        meat: Meat::Chicken,
+        beans: Beans::Black
+    };
+    let best = RestaurantItem::VeganPlate;
+
+    println!("Lunch was {lunch:?} and dinner was {dinner:?} but best was {best:?}")
+    /*
     let first_card = CardSuit::Hearts;
     let mut second_card = CardSuit::Spades;
     second_card = CardSuit::Clubs;
@@ -198,5 +231,5 @@ fn main() {
             println!("You Lost!");
         }
     }
-
+    */
 }
