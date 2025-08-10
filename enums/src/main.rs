@@ -163,6 +163,50 @@ impl LaundryCycle {
     }
 }
 
+enum OnlineOrderStatus {
+    Ordered,
+    Packed,
+    Shipped,
+    Delivered
+}
+
+impl OnlineOrderStatus {
+    fn check(&self) {
+        match self {
+            OnlineOrderStatus::Ordered | OnlineOrderStatus::Packed => {
+                println!("Your item is being prepped for shipment");
+            }
+            OnlineOrderStatus::Delivered => {
+                println!("Your item has been delivered");
+            }
+            _ => {
+                println!("Your item is not there yet")
+            } 
+        }
+    }
+}
+
+enum Milk {
+    Lowfat(i32),
+    Whole
+}
+
+impl Milk {
+    fn drink(self) {
+        match self {
+            Milk::Lowfat(2) => {
+                println!("Delicious, 2% milk is my favorite");
+            }
+            Milk::Lowfat(percent) => {
+                println!("You've got the lowfat {percent} percent version!");
+            }
+            Milk::Whole => {
+                println!("You've got the whole milk");
+            }
+        }
+    }
+}
+
 fn main() {
     let lunch = RestaurantItem::Burrito{
         meat: Meat::Steak, 
@@ -175,6 +219,7 @@ fn main() {
     let best = RestaurantItem::VeganPlate;
 
     println!("Lunch was {lunch:?} and dinner was {dinner:?} but best was {best:?}");
+
     /*
     let first_card = CardSuit::Hearts;
     let mut second_card = CardSuit::Spades;
@@ -275,6 +320,13 @@ fn main() {
 
     let delicate_cycle = LaundryCycle::Delicate(String::from("Silk"));
     delicate_cycle.wash_laundry();
+
+    OnlineOrderStatus::Ordered.check();
+    OnlineOrderStatus::Delivered.check();
+
+    Milk::Lowfat(1).drink();
+    Milk::Lowfat(2).drink();
+    Milk::Whole.drink();
 }
 
 fn years_since_release(os: OperatingSystem) -> u32 {
