@@ -135,6 +135,18 @@ enum RestaurantItem {
     VeganPlate,
 }
 
+enum OperatingSystem {
+    Windows,
+    MacOS,
+    Linux
+}
+
+enum LaundryCycle {
+    Cold,
+    Hot { temperature: u32 },
+    Delicate(String)
+}
+
 fn main() {
     let lunch = RestaurantItem::Burrito{
         meat: Meat::Steak, 
@@ -146,7 +158,7 @@ fn main() {
     };
     let best = RestaurantItem::VeganPlate;
 
-    println!("Lunch was {lunch:?} and dinner was {dinner:?} but best was {best:?}")
+    println!("Lunch was {lunch:?} and dinner was {dinner:?} but best was {best:?}");
     /*
     let first_card = CardSuit::Hearts;
     let mut second_card = CardSuit::Spades;
@@ -232,4 +244,41 @@ fn main() {
         }
     }
     */
+
+    let my_computer = OperatingSystem::Linux;
+    let age = years_since_release(my_computer);
+    println!("My computer's operating systems is {age} years old");
+
+    let dads_computer = OperatingSystem::Windows;
+    let age = years_since_release(dads_computer);
+    println!("My dad's computer is {age} years old");
+
+    wash_laundry(LaundryCycle::Cold);
+    wash_laundry(LaundryCycle::Hot { temperature: 100 });
+    wash_laundry(LaundryCycle::Delicate(String::from("Silk")));
+}
+
+fn years_since_release(os: OperatingSystem) -> u32 {
+    match os {
+        OperatingSystem::Windows => {
+            println!("Quite an old operating system!");
+            39
+        },
+        OperatingSystem::MacOS => 23,
+        OperatingSystem::Linux => 34,
+    }
+}
+
+fn wash_laundry(cycle: LaundryCycle) {
+    match cycle {
+        LaundryCycle::Cold => {
+            println!("Running the laundry with cold temperature");
+        },
+        LaundryCycle::Hot { temperature } => {
+            println!("Running the laundry with a temperature of {temperature}");
+        },
+        LaundryCycle::Delicate(fabric_type) => {
+            println!("Running the laundry with a delicate cycle for {fabric_type}");
+        }
+    }
 }
