@@ -188,9 +188,11 @@ impl OnlineOrderStatus {
 
 enum Milk {
     Lowfat(i32),
-    Whole
+    Whole,
+    NonDairy { kind: String},
 }
 
+/*
 impl Milk {
     fn drink(self) {
         match self {
@@ -206,6 +208,7 @@ impl Milk {
         }
     }
 }
+    */
 
 fn main() {
     let lunch = RestaurantItem::Burrito{
@@ -324,9 +327,29 @@ fn main() {
     OnlineOrderStatus::Ordered.check();
     OnlineOrderStatus::Delivered.check();
 
+    /*
     Milk::Lowfat(1).drink();
     Milk::Lowfat(2).drink();
     Milk::Whole.drink();
+    */
+
+    let my_beverage = Milk::Whole;
+    let your_beverage = Milk::Lowfat(2);
+    let his_beverage = Milk::NonDairy { kind: String::from("Oat") };
+
+    if let Milk::Whole = my_beverage {
+        println!("You have whole milk");
+    }
+
+    if let Milk::Lowfat(percent) = your_beverage {
+        println!("Your beverage is {percent}% milk");
+    }
+
+    if let Milk::NonDairy { kind } = his_beverage {
+        println!("His beverage is {kind} milk");
+    } else {
+        println!("You have some other milk variant");
+    }
 }
 
 fn years_since_release(os: OperatingSystem) -> u32 {
