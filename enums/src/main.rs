@@ -350,6 +350,13 @@ fn main() {
     } else {
         println!("You have some other milk variant");
     }
+
+    let Milk::Lowfat(percent) = my_beverage else {
+        println!("You do not have the lowfat milk");
+        return;
+    };
+
+    println!("{percent}% milk is available here");
 }
 
 fn years_since_release(os: OperatingSystem) -> u32 {
