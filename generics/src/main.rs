@@ -8,6 +8,18 @@ struct TreasureChest<T> {
     treasure: T 
 }
 
+impl TreasureChest<String> {
+    fn clean_treasure(&mut self) {
+        self.treasure = self.treasure.trim().to_string();
+    }
+}
+
+impl TreasureChest<[&str; 3]> {
+    fn amount_of_treasure(&self) -> usize {
+        self.treasure.len()
+    }
+}
+
 fn main() {
     println!("{}", identity(5));
     println!("{}", identity(12.34));
@@ -39,17 +51,20 @@ fn main() {
     };
     println!("{:#?}", gold_chest);
 
-    let silver_chest = TreasureChest {
+    let mut silver_chest = TreasureChest {
         captain: String::from("Bloodsail"),
-        treasure: String::from("Silver")
+        treasure: String::from("     Silver     ")
     };
-    println!("{:#?}", silver_chest);
+    println!("before clean_treasure: {:#?}", silver_chest);
+    silver_chest.clean_treasure();
+    println!("after clean_treasure: {:#?}", silver_chest);
 
     let special_chest = TreasureChest {
         captain: String::from("Bootyplunder"),
         treasure: ["Gold", "Silver", "Platinum"]
     };
     println!("{:#?}", special_chest);
+    println!("amount of treasure: {:#?}", special_chest.amount_of_treasure());
 }
 
 fn identity<T>(value: T) -> T {
