@@ -1,11 +1,18 @@
+#![allow(dead_code)]
+
 #[derive(Debug)]
 struct DeliSandwich {}
 
 #[derive(Debug)]
-#[allow(dead_code)]
 struct TreasureChest<T> {
     captain: String,
     treasure: T 
+}
+
+#[derive(Debug)]
+enum Chestnutcake<T> {
+    Plain,
+    Topping(T)
 }
 
 impl TreasureChest<String> {
@@ -73,6 +80,17 @@ fn main() {
     println!("{:#?}", special_chest);
     println!("amount of treasure: {:#?}", special_chest.amount_of_treasure());
     println!("capital captain: {:#?}", special_chest.capital_captain());
+
+    let mushroom = Chestnutcake::Topping("mushroom");
+    println!("{:#?}", mushroom);
+    let onions = Chestnutcake::Topping("onions".to_string());
+    println!("{:#?}", onions);
+    let topping = "sweetpotato".to_string();
+    let sweetpotato = Chestnutcake::Topping(&topping);
+    println!("{:#?}", sweetpotato);
+    let mut plain: Chestnutcake<String> = Chestnutcake::Plain;
+    plain = Chestnutcake::Topping("fruits".to_string());
+    println!("{:#?}", plain);
 }
 
 fn identity<T>(value: T) -> T {
