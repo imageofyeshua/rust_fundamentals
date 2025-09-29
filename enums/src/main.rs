@@ -114,7 +114,6 @@ enum PaymentMethodType {
     Cash,
     Crypto {username: String, dna_code: String}
 }
-*/
 
 #[derive(Debug)]
 enum Beans {
@@ -192,7 +191,6 @@ enum Milk {
     NonDairy { kind: String},
 }
 
-/*
 impl Milk {
     fn drink(self) {
         match self {
@@ -208,9 +206,49 @@ impl Milk {
         }
     }
 }
-    */
+*/
+
+#[derive(Debug)]
+enum Tier {
+    Gold,
+    Silver,
+    Platinum,
+}
+
+#[derive(Debug)]
+enum Subscription {
+    Free,
+    Basic(f64, u32),
+    Premium { tier: Tier },
+}
+
+impl Subscription {
+    fn summarize(&self) {
+        match self {
+            Subscription::Free => {
+                println!("You have limited access to the site");
+            }
+            Subscription::Basic(price, month) => {
+                println!("You have limited access to the site's premium features for {price} for {month} months");
+            }
+            Subscription::Premium { tier } => {
+                println!("You have full access to the site's premium features. Your tier is {tier:?}");
+            }
+        }
+    }
+}
 
 fn main() {
+
+    Subscription::Free.summarize();
+
+    let basic = Subscription::Basic(4.99, 3);
+    basic.summarize();
+
+    let premium = Subscription::Premium { tier: Tier::Gold };
+    premium.summarize();
+
+    /*
     let lunch = RestaurantItem::Burrito{
         meat: Meat::Steak, 
         beans: Beans::Pinto
@@ -223,7 +261,6 @@ fn main() {
 
     println!("Lunch was {lunch:?} and dinner was {dinner:?} but best was {best:?}");
 
-    /*
     let first_card = CardSuit::Hearts;
     let mut second_card = CardSuit::Spades;
     second_card = CardSuit::Clubs;
@@ -307,7 +344,6 @@ fn main() {
             println!("You Lost!");
         }
     }
-    */
 
     let my_computer = OperatingSystem::Linux;
     let age = years_since_release(my_computer);
@@ -327,11 +363,9 @@ fn main() {
     OnlineOrderStatus::Ordered.check();
     OnlineOrderStatus::Delivered.check();
 
-    /*
     Milk::Lowfat(1).drink();
     Milk::Lowfat(2).drink();
     Milk::Whole.drink();
-    */
 
     let my_beverage = Milk::Whole;
     let your_beverage = Milk::Lowfat(2);
@@ -357,8 +391,10 @@ fn main() {
     };
 
     println!("{percent}% milk is available here");
+    */
 }
 
+/*
 fn years_since_release(os: OperatingSystem) -> u32 {
     match os {
         OperatingSystem::Windows => {
@@ -369,3 +405,4 @@ fn years_since_release(os: OperatingSystem) -> u32 {
         OperatingSystem::Linux => 34,
     }
 }
+*/

@@ -1,0 +1,61 @@
+#[derive(Debug)]
+struct DeliSandwich {}
+
+#[derive(Debug)]
+#[allow(dead_code)]
+struct TreasureChest<T> {
+    captain: String,
+    treasure: T 
+}
+
+fn main() {
+    println!("{}", identity(5));
+    println!("{}", identity(12.34));
+    println!("{}", identity("Hello, Daniel"));
+    println!("{}", identity(String::from("Adios!")));
+    println!("{}", identity(true));
+    println!("{:?}", identity(DeliSandwich {}));
+
+    // turbofish operator
+    println!("{}", identity::<i32>(5));
+    println!("{}", identity::<i8>(5));
+    println!("{}", identity::<u32>(5));
+    println!("{}", identity::<f64>(12.34));
+    println!("{}", identity::<&str>("Hello, Daniel"));
+    println!("{}", identity::<String>(String::from("Adios!")));
+    println!("{}", identity::<bool>(true));
+    println!("{:?}", identity::<DeliSandwich>(DeliSandwich {}));
+
+    // multiple generics
+    println!("{:?}", make_tuple("hello", 5));
+    println!("{:?}", make_tuple(12.34, 153));
+    println!("{:?}", make_tuple(true, 3.12));
+    println!("{:?}", make_tuple(true, false));
+
+    // generics in struct
+    let gold_chest = TreasureChest {
+        captain: String::from("Firebeard"),
+        treasure: "Gold"
+    };
+    println!("{:#?}", gold_chest);
+
+    let silver_chest = TreasureChest {
+        captain: String::from("Bloodsail"),
+        treasure: String::from("Silver")
+    };
+    println!("{:#?}", silver_chest);
+
+    let special_chest = TreasureChest {
+        captain: String::from("Bootyplunder"),
+        treasure: ["Gold", "Silver", "Platinum"]
+    };
+    println!("{:#?}", special_chest);
+}
+
+fn identity<T>(value: T) -> T {
+    value
+}
+
+fn make_tuple<T, U>(first: T, second: U) -> (T, U) {
+    (first, second)
+}
