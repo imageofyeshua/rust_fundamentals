@@ -20,6 +20,13 @@ impl TreasureChest<[&str; 3]> {
     }
 }
 
+// generic type impl of struct
+impl<T> TreasureChest<T> {
+    fn capital_captain(&self) -> String {
+        self.captain.to_uppercase()
+    }
+}
+
 fn main() {
     println!("{}", identity(5));
     println!("{}", identity(12.34));
@@ -65,6 +72,7 @@ fn main() {
     };
     println!("{:#?}", special_chest);
     println!("amount of treasure: {:#?}", special_chest.amount_of_treasure());
+    println!("capital captain: {:#?}", special_chest.capital_captain());
 }
 
 fn identity<T>(value: T) -> T {
