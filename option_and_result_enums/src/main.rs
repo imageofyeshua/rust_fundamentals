@@ -25,6 +25,10 @@ fn main() {
     let _cello: Option<&String> = _musical_instrument.get(2);
     println!("{:?}", _cello);
 
+    let _valid_instrument = _cello.unwrap();
+    println!("{_valid_instrument}");
+
     let _invalid_instrument = _musical_instrument.get(100);
     println!("{:?}", _invalid_instrument);
+    _invalid_instrument.expect("### Unable to retrieve musical instrument ###");
 }
