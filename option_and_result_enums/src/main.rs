@@ -55,6 +55,13 @@ fn main() {
         Option::Some(value) => println!("Item is available: {value}"),
         Option::None => println!("Your item doesn't exist in our system"),
     }
+
+    // unwrap_or method
+    let _present_value = Some(12);
+    let _missing_value: Option<i32> = None;
+
+    println!("{}", _present_value.unwrap_or(0));
+    println!("{}", _missing_value.unwrap_or(100));
 }
 
 fn is_item_in_stock(item_is_in_system: bool, item_is_in_stock: bool) -> Option<bool> {
