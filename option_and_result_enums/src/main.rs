@@ -92,11 +92,19 @@ fn main() {
     let another_option = MyOption::Some(200);
     println!("another option: {}", another_option.unwrap_or(224));
 
+    /*
     let none_option = MyOption::None;
     println!("none option: {}", none_option.unwrap());
 
     let another_none_option = MyOption::None;
     println!("another none option: {}", another_none_option.unwrap_or(224));
+    */
+
+    // result enum
+    let ok: Result<i8, &str> = Ok(5);
+    println!("{ok:?}");
+    let disaster: Result<i32, &str> = Err("Something went wrong!");
+    println!("{:?}", disaster);
 }
 
 fn is_item_in_stock(item_is_in_system: bool, item_is_in_stock: bool) -> Option<bool> {
