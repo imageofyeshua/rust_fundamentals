@@ -30,5 +30,27 @@ fn main() {
 
     let _invalid_instrument = _musical_instrument.get(100);
     println!("{:?}", _invalid_instrument);
-    _invalid_instrument.expect("### Unable to retrieve musical instrument ###");
+    // _invalid_instrument.expect("### Unable to retrieve musical instrument ###");
+
+    let _piano: Option<&String> = _musical_instrument.first();
+
+    match _piano {
+        Option::Some(instrument) => println!("Playing the {instrument}"),
+        Option::None => println!("Singing with my voice"),
+    }
+
+    match _invalid_instrument {
+        Option::Some(instrument) => println!("Playing the {instrument}"),
+        Option::None => println!("Singing with my voice"),
+    }
+
+    play(_piano);
+    play(_invalid_instrument);
+}
+
+fn play(instrument_option: Option<&String>) {
+    match instrument_option {
+        Option::Some(instrument) => println!("Playing the {instrument}"),
+        Option::None => println!("Singing with my voice"),
+    }
 }
