@@ -1,3 +1,25 @@
+#[derive(Debug, Copy, Clone)]
+enum MyOption {
+    Some(i32),
+    None
+}
+
+impl MyOption {
+    fn unwrap(self) -> i32 {
+        match self {
+            MyOption::Some(value) => value,
+            MyOption::None => panic!("Uh oh!"),
+        }
+    }
+
+    fn unwrap_or(self, fallback_value: i32) -> i32 {
+        match self {
+            MyOption::Some(value) => value,
+            MyOption::None => fallback_value,
+        }
+    }
+}
+
 fn main() {
     // basic concept
     let _a = Option::Some(5);
@@ -62,6 +84,19 @@ fn main() {
 
     println!("{}", _present_value.unwrap_or(0));
     println!("{}", _missing_value.unwrap_or(100));
+
+    // custom unwrap 
+    let some_option = MyOption::Some(100);
+    println!("some option: {}", some_option.unwrap());
+
+    let another_option = MyOption::Some(200);
+    println!("another option: {}", another_option.unwrap_or(224));
+
+    let none_option = MyOption::None;
+    println!("none option: {}", none_option.unwrap());
+
+    let another_none_option = MyOption::None;
+    println!("another none option: {}", another_none_option.unwrap_or(224));
 }
 
 fn is_item_in_stock(item_is_in_system: bool, item_is_in_stock: bool) -> Option<bool> {
