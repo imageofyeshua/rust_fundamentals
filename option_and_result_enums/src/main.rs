@@ -139,6 +139,13 @@ fn main() {
     println!("My result: {}", _my_result.unwrap());
     println!("My result: {}", _my_result.unwrap());
     println!("My result: {}", _my_result.unwrap());
+
+    // while - let construct
+    let mut sauces = vec!["Mayonaise", "Ketchup", "Ranch"];
+
+    while let Some(sauce) = sauces.pop() {
+        println!("The next sauce is {sauce}");
+    }
 }
 
 // &'static str implements copy trait >> doesn't move ownership
