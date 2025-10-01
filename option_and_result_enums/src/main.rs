@@ -1,6 +1,6 @@
 #[derive(Debug)]
 struct Food {
-    name: String
+    name: String,
 }
 
 #[derive(Debug)]
@@ -15,13 +15,13 @@ impl Restaurant {
             return None;
         }
 
-        if self.reservations <  12 {
-            Some(Food { 
-                name: String::from("Uni Sashimi")
+        if self.reservations < 12 {
+            Some(Food {
+                name: String::from("Uni Sashimi"),
             })
         } else {
-            Some(Food { 
-                name: String::from("Strip Steak")
+            Some(Food {
+                name: String::from("Strip Steak"),
             })
         }
     }
@@ -35,25 +35,33 @@ impl Restaurant {
             return Err(String::from("No delivery address specified"));
         }
 
-        Ok(Food { name: String::from("Burger")})
+        Ok(Food {
+            name: String::from("Burger"),
+        })
     }
 }
 
 fn main() {
     let marios = Restaurant {
         reservations: 11,
-        has_mice_infestation: true
+        has_mice_infestation: true,
     };
 
     println!("Marios Chef Special: {:?}", marios.chef_special());
-    println!("Marios Burger Delivery: {:?}", marios.deliver_burger("123 Elm Street"));
+    println!(
+        "Marios Burger Delivery: {:?}",
+        marios.deliver_burger("123 Elm Street")
+    );
 
     let angelos = Restaurant {
         reservations: 14,
-        has_mice_infestation: false
+        has_mice_infestation: false,
     };
 
     println!("Angelos Chef Special: {:?}", angelos.chef_special());
     println!("Angelos Burger Delivery: {:?}", angelos.deliver_burger(""));
-    println!("Angelos Burger Delivery: {:?}", angelos.deliver_burger("123 Elm Street"));
+    println!(
+        "Angelos Burger Delivery: {:?}",
+        angelos.deliver_burger("123 Elm Street")
+    );
 }
