@@ -105,6 +105,57 @@ fn main() {
     println!("{ok:?}");
     let disaster: Result<i32, &str> = Err("Something went wrong!");
     println!("{:?}", disaster);
+
+    let text = "50";
+    let _text_as_number = text.parse::<i32>();
+    println!("{:?}", _text_as_number);
+
+    let text = "Alabama";
+    let _text_as_number = text.parse::<i32>();
+    println!("{:?}", _text_as_number);
+
+    let _result = divide(10.0, 4.0);
+
+    /*
+    match _result {
+        Ok(calculation) => println!("Result: {}", calculation),
+        Err(message) => println!("Error: {}", message),
+    }
+    */
+
+    println!("{}", _result.unwrap());
+    // println!("{}", _result.is_ok());
+    // println!("{}", _result.is_err());
+    // println!("{}", _result.unwrap_or(5.0));
+    // println!("{}", _result.expect("Unable to calculate"));
+    
+    let _my_result = operation(true);
+
+    let _content = match _my_result {
+        Ok(message) => message,
+        Err(error) => error,
+    };
+
+    println!("My result: {}", _my_result.unwrap());
+    println!("My result: {}", _my_result.unwrap());
+    println!("My result: {}", _my_result.unwrap());
+}
+
+// &'static str implements copy trait >> doesn't move ownership
+fn operation(great_success: bool) -> Result<&'static str, &'static str> {
+    if great_success {
+        Ok("Success")
+    } else {
+        Err("Error")
+    }
+}
+
+fn divide(numerator: f64, denominator: f64) -> Result<f64, String> {
+    if denominator == 0.0 {
+        Err("Cannot divide by zero".to_string())
+    } else {
+        Ok(numerator / denominator)
+    }
 }
 
 fn is_item_in_stock(item_is_in_system: bool, item_is_in_stock: bool) -> Option<bool> {
