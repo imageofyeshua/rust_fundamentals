@@ -21,7 +21,7 @@ fn main() {
     let pepperoni = String::from("Pepperoni");
     let mushroom = String::from("Mushroom");
     let radish = String::from("Radish");
-    let cake_toppings = vec![pepperoni, mushroom, radish];
+    let mut cake_toppings = vec![pepperoni, mushroom, radish];
 
     let value = pancake_diameters[2];
     println!("pancake diameter: {value}");
@@ -41,4 +41,37 @@ fn main() {
         Some(value) => println!("The topping is {value}"),
         None => println!("There is nothing, man!")
     }
+
+    cake_toppings[1] = String::from("Peach");
+    println!("{cake_toppings:#?}");
+
+    let target_topping = &mut cake_toppings[2];
+    target_topping.push_str(" and Spaghetti");
+
+    let another_topping = &cake_toppings[2];
+    let yet_another_topping = &cake_toppings[2];
+    println!("{cake_toppings:#?}");
+
+    // ownership movement
+    let mut delicious_toppings = cake_toppings;
+    
+    let topping_reference = &delicious_toppings[1];
+    println!("The topping is {topping_reference}");
+    
+    delicious_toppings.push(String::from("Olives"));
+    
+    // vector capacity
+    let mut seasons: Vec<&str> = Vec::with_capacity(4); 
+    println!("Length: {}, Capacity: {}", seasons.len(), seasons.capacity());
+
+    seasons.push("Spring");
+    seasons.push("Summer");
+    seasons.push("Fall");
+    seasons.push("Winter");
+
+    println!("Length: {}, Capacity: {}", seasons.len(), seasons.capacity());
+
+    // copy and enlarge original memory to different spot
+    seasons.push("Summer");
+    println!("Length: {}, Capacity: {}", seasons.len(), seasons.capacity());
 }
