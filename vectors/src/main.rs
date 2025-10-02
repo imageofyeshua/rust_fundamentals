@@ -34,4 +34,11 @@ fn main() {
 
     let cake_toppings_slice = &cake_toppings[1..];
     println!("{cake_toppings_slice:?}");
+
+    let option = cake_toppings.get(2);
+
+    match option {
+        Some(value) => println!("The topping is {value}"),
+        None => println!("There is nothing, man!")
+    }
 }
