@@ -11,3 +11,14 @@ pub struct Item {
     pub quantity: u32
 }
 
+impl Item {
+    pub fn new(name: String, category: ProductCategory, quantity: u32) -> Self {
+        super::talk_to_manager();
+        Self {
+            name,
+            category,
+            quantity
+        }
+    }
+}
+
