@@ -1,17 +1,8 @@
 #![allow(dead_code)]
 
-mod inventory;
-mod orders;
-
-use std::{
-    fmt,
-    io::{self, stdin, stdout}
-};
-
 use fake::{Fake, Faker};
 
-use inventory::{Item, ProductCategory, FLOOR_SPACE, MANAGER as INVENTORY_MANAGER};
-use orders::MANAGER as ORDERS_MANAGER; 
+use warehouse::{Item, ProductCategory, FLOOR_SPACE, INVENTORY_MANAGER, ORDERS_MANAGER};
 
 fn main() {
     println!(
