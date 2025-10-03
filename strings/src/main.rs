@@ -31,4 +31,19 @@ fn main() {
     let model = format!("{0} {1} {0} {1}", middle_name, last_name);
     println!("{icon}");
     println!("{model}");
+
+    // common string methods
+    let mut music_genres = "    Gospel, Country, Rap    ";
+    println!("{}", music_genres.trim());
+    println!("{}", music_genres.trim_start());
+    println!("{}", music_genres.trim_end());
+
+    music_genres = music_genres.trim();
+    println!("{}", music_genres.to_uppercase());
+    println!("{}", music_genres.to_lowercase());
+
+    println!("{}", music_genres.replace("a", "@"));
+
+    let genres: Vec<&str> = music_genres.split(", ").collect();
+    println!("{:#?}", genres);
 }
