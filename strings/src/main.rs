@@ -1,6 +1,7 @@
 use std::io;
 
 fn main() {
+    /*
     let pirate = "BloodyHook";
     let sailer = String::from(pirate);
     let bad_guy = pirate.to_string();
@@ -56,4 +57,45 @@ fn main() {
         Ok(_) => println!("Hello, {}", name.trim()),
         Err(message) => println!("There was an error: {message}")
     }
+    */
+
+    // exercise
+    let mut amount = String::from("40");
+    make_money(&mut amount);
+    println!("{amount}");
+
+    let banana = trim_and_capitalize("     banana    ");
+    println!("{banana}");
+
+    let collection = elements("Gold!Silver!Platinum");
+    println!("{:#?}", collection);
+
+    let full_name = get_identity();
+    println!("{full_name}");
 }
+
+fn get_identity() -> String {
+    let mut first_name = String::new();
+    let mut last_name = String::new();
+    let input = io::stdin();
+
+    println!("What is your first name?");
+    input.read_line(&mut first_name).expect("Wrong input!");
+    println!("What is your last name?");
+    input.read_line(&mut last_name).expect("Wrong input!");
+
+    format!("{} {}", first_name.trim(), last_name.trim())
+}
+
+fn elements(text: &str) -> Vec<&str> {
+    text.split("!").collect::<Vec<&str>>()
+}
+
+fn trim_and_capitalize(text: &str) -> String {
+    text.trim().to_uppercase()
+}
+
+fn make_money(text: &mut String) {
+    text.push_str("$$$");
+}
+
