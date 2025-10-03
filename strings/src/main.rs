@@ -8,4 +8,20 @@ fn main() {
 
     let first_initial = &pirate[0..1];
     println!("{first_initial}");
+
+    let mut full_name = String::from("Daniel");
+    let last_name = "Park";
+    full_name.push(' ');
+    full_name.push_str(last_name);
+    println!("{full_name}");
+
+    let middle_name = String::from("John");
+    full_name.push(' ');
+    full_name.push_str(&middle_name); // &String -> &str
+    println!("{full_name}");
+
+    // + (add) moves ownership, thus use clone() method
+    let your_name = middle_name.clone() + &last_name;
+    println!("{your_name}");
+    println!("{middle_name}");
 }
