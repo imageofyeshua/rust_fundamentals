@@ -1,3 +1,4 @@
+use std::io;
 
 fn main() {
     let pirate = "BloodyHook";
@@ -46,4 +47,13 @@ fn main() {
 
     let genres: Vec<&str> = music_genres.split(", ").collect();
     println!("{:#?}", genres);
+
+    let mut name = String::new();
+    println!("What is your name");
+    // io::stdin().read_line(&mut name).expect("Failed to collect input from the user");
+    // trim() method removes carriage return '\n'
+    match io::stdin().read_line(&mut name) {
+        Ok(_) => println!("Hello, {}", name.trim()),
+        Err(message) => println!("There was an error: {message}")
+    }
 }
