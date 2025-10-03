@@ -21,7 +21,14 @@ fn main() {
     println!("{full_name}");
 
     // + (add) moves ownership, thus use clone() method
-    let your_name = middle_name.clone() + &last_name;
+    let your_name = middle_name.clone() + last_name;
     println!("{your_name}");
     println!("{middle_name}");
+    println!("{last_name}");
+
+    // format! macro
+    let icon = format!("{middle_name} {last_name}");
+    let model = format!("{0} {1} {0} {1}", middle_name, last_name);
+    println!("{icon}");
+    println!("{model}");
 }
