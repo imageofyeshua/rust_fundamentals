@@ -38,4 +38,9 @@ fn main() {
     println!("{}", coffee_pairings.len());
     println!("{drink} {milk}");
 
+    // access value thru key
+    coffee_pairings.insert("Flat White", "Almond Milk");
+    // get() methods returns Option<&&str>, copied() method returns Option<&str>
+    let value = coffee_pairings.get("Latte").copied().unwrap_or("Unknown");
+    println!("{:?}", value);
 }
