@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::collections::HashSet;
 
 fn main() {
     let mut menu: HashMap<String, f64> = HashMap::new();
@@ -54,4 +55,47 @@ fn main() {
 
     coffee_pairings.entry("Cappuccino").or_insert("Hazlnut Milk");
     println!("{coffee_pairings:#?}");
+
+    // hashset >> a collection type that stores unique values
+    let mut concert_queue = HashSet::<&str>::new();
+    println!("{:?}", concert_queue);
+
+    concert_queue.insert("Molly");
+    concert_queue.insert("Megan");
+    println!("{:?}", concert_queue);
+    println!("{}", concert_queue.len());
+
+    println!("{}", concert_queue.remove("Megan"));
+    println!("{:?}", concert_queue);
+
+    println!("{}", concert_queue.contains("Molly"));
+    println!("{}", concert_queue.contains("Fred"));
+
+    println!("{:?}", concert_queue.get("Molly"));
+    println!("{:?}", concert_queue.get("Joe"));
+
+    // hashset operations
+    let mut movie_queue = HashSet::<&str>::new();
+    let mut concert_queue = HashSet::<&str>::new();
+
+    concert_queue.insert("Daniel");
+    concert_queue.insert("Jason");
+
+    movie_queue.insert("Daniel");
+    movie_queue.insert("Issac");
+
+    println!("{:?}", concert_queue.union(&movie_queue));
+    println!("{:?}", movie_queue.union(&concert_queue));
+
+    println!("{:?}", concert_queue.difference(&movie_queue));
+    println!("{:?}", movie_queue.difference(&concert_queue));
+
+    println!("{:?}", concert_queue.symmetric_difference(&movie_queue));
+    println!("{:?}", movie_queue.symmetric_difference(&concert_queue));
+
+    println!("{:?}", concert_queue.is_disjoint(&movie_queue));
+    println!("{:?}", movie_queue.is_disjoint(&concert_queue));
+
+    println!("{:?}", concert_queue.is_subset(&movie_queue));
+    println!("{:?}", concert_queue.is_superset(&movie_queue));
 }
