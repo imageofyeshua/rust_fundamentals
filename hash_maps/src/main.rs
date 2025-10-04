@@ -23,10 +23,19 @@ fn main() {
         ("Ben", 6),
     ];
 
-    let mut years_at_companty = HashMap::from(data);
-    println!("{:#?}", years_at_companty);
+    let mut years_at_company = HashMap::from(data);
+    println!("{:#?}", years_at_company);
 
-    let ben = years_at_companty.remove("Ben");
-    println!("{:#?}", years_at_companty);
+    let ben = years_at_company.remove("Ben");
+    println!("{:#?}", years_at_company);
     println!("ben has worked here for {:?} years", ben.unwrap());
+
+    // hashmap ownership
+    let mut coffee_pairings = HashMap::<&str, &str>::new();
+    let drink = String::from("Latte");
+    let milk = String::from("Oat Milk");
+    coffee_pairings.insert(&drink, &milk);
+    println!("{}", coffee_pairings.len());
+    println!("{drink} {milk}");
+
 }
