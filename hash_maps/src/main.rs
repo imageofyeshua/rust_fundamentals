@@ -1,101 +1,24 @@
 use std::collections::HashMap;
-use std::collections::HashSet;
 
 fn main() {
-    let mut menu: HashMap<String, f64> = HashMap::new();
+    let mut sauces_to_meals = HashMap::from([
+        ("Ketchup", vec!["French Fries", "Burgers", "Hot Bars"]),
+        ("Mayonnaise", vec!["Sandwiches", "Burgers", "Coleslaw"]),
+    ]);
 
-    menu.insert(String::from("Steak"), 29.99);
-    menu.insert(String::from("Tuna"), 39.99);
-    menu.insert(String::from("Sushi"), 19.99);
-    
-    println!("{:#?}", menu);
+    sauces_to_meals.insert("Mustard", vec!["Hot Bars", "Burgers", "Pretzels"]);
+    println!("{:#?}", sauces_to_meals);
 
-    // let mut country_capitals: HashMap<&str, &str> = HashMap::new();
-    let mut country_capitals = HashMap::<&str, &str>::new();
-    country_capitals.insert("France", "Paris");
-    country_capitals.insert("Korea", "Seoul");
-    country_capitals.insert("Germany", "Berlin");
+    println!("{:#?}", sauces_to_meals.remove("Mayonnaise").unwrap());
 
-    println!("{:#?}", country_capitals);
+    let mustard_meals = sauces_to_meals.get("Mustard");
+    println!("{mustard_meals:#?}");
 
-    let data = [
-        ("Bobby", 7),
-        ("Grant", 4),
-        ("Ben", 6),
-    ];
+    match mustard_meals {
+        Some(meal) => println!("The meals were {meal:#?}"),
+        None => println!("There were no meals for that sauce!")
+    }
 
-    let mut years_at_company = HashMap::from(data);
-    println!("{:#?}", years_at_company);
-
-    let ben = years_at_company.remove("Ben");
-    println!("{:#?}", years_at_company);
-    println!("ben has worked here for {:?} years", ben.unwrap());
-
-    // hashmap ownership
-    let mut coffee_pairings = HashMap::<&str, &str>::new();
-    let drink = String::from("Latte");
-    let milk = String::from("Oat Milk");
-    coffee_pairings.insert(&drink, &milk);
-    println!("{}", coffee_pairings.len());
-    println!("{drink} {milk}");
-
-    // access value thru key
-    coffee_pairings.insert("Flat White", "Almond Milk");
-    // get() methods returns Option<&&str>, copied() method returns Option<&str>
-    let value = coffee_pairings.get("Latte").copied().unwrap_or("Unknown");
-    println!("{:?}", value);
-
-    // overwriting a value with an existing key
-    coffee_pairings.insert("Latte", "Pistachio Milk");
-    println!("{:#?}", coffee_pairings);
-
-    // entry method
-    coffee_pairings.entry("Latte").or_insert("Cow Milk");
-    println!("{coffee_pairings:#?}");
-
-    coffee_pairings.entry("Cappuccino").or_insert("Hazlnut Milk");
-    println!("{coffee_pairings:#?}");
-
-    // hashset >> a collection type that stores unique values
-    let mut concert_queue = HashSet::<&str>::new();
-    println!("{:?}", concert_queue);
-
-    concert_queue.insert("Molly");
-    concert_queue.insert("Megan");
-    println!("{:?}", concert_queue);
-    println!("{}", concert_queue.len());
-
-    println!("{}", concert_queue.remove("Megan"));
-    println!("{:?}", concert_queue);
-
-    println!("{}", concert_queue.contains("Molly"));
-    println!("{}", concert_queue.contains("Fred"));
-
-    println!("{:?}", concert_queue.get("Molly"));
-    println!("{:?}", concert_queue.get("Joe"));
-
-    // hashset operations
-    let mut movie_queue = HashSet::<&str>::new();
-    let mut concert_queue = HashSet::<&str>::new();
-
-    concert_queue.insert("Daniel");
-    concert_queue.insert("Jason");
-
-    movie_queue.insert("Daniel");
-    movie_queue.insert("Issac");
-
-    println!("{:?}", concert_queue.union(&movie_queue));
-    println!("{:?}", movie_queue.union(&concert_queue));
-
-    println!("{:?}", concert_queue.difference(&movie_queue));
-    println!("{:?}", movie_queue.difference(&concert_queue));
-
-    println!("{:?}", concert_queue.symmetric_difference(&movie_queue));
-    println!("{:?}", movie_queue.symmetric_difference(&concert_queue));
-
-    println!("{:?}", concert_queue.is_disjoint(&movie_queue));
-    println!("{:?}", movie_queue.is_disjoint(&concert_queue));
-
-    println!("{:?}", concert_queue.is_subset(&movie_queue));
-    println!("{:?}", concert_queue.is_superset(&movie_queue));
+    sauces_to_meals.entry("Soy Sauce").or_insert(vec!["Sushi", "Dumplings"]);
+    println!("{sauces_to_meals:#?}");
 }
