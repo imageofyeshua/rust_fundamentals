@@ -16,4 +16,17 @@ fn main() {
     country_capitals.insert("Germany", "Berlin");
 
     println!("{:#?}", country_capitals);
+
+    let data = [
+        ("Bobby", 7),
+        ("Grant", 4),
+        ("Ben", 6),
+    ];
+
+    let mut years_at_companty = HashMap::from(data);
+    println!("{:#?}", years_at_companty);
+
+    let ben = years_at_companty.remove("Ben");
+    println!("{:#?}", years_at_companty);
+    println!("ben has worked here for {:?} years", ben.unwrap());
 }
