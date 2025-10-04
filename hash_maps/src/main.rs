@@ -47,4 +47,11 @@ fn main() {
     // overwriting a value with an existing key
     coffee_pairings.insert("Latte", "Pistachio Milk");
     println!("{:#?}", coffee_pairings);
+
+    // entry method
+    coffee_pairings.entry("Latte").or_insert("Cow Milk");
+    println!("{coffee_pairings:#?}");
+
+    coffee_pairings.entry("Cappuccino").or_insert("Hazlnut Milk");
+    println!("{coffee_pairings:#?}");
 }
