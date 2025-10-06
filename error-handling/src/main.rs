@@ -1,5 +1,5 @@
 use std::process;
-use std::io::stdin;
+use std::io::{stdin, Read};
 use std::fs::File;
 
 fn main() {
@@ -13,15 +13,23 @@ fn main() {
         process::exit(1)
     }
 
-    let file = match File::open(input.trim()) {
+    let mut file = match File::open(input.trim()) {
         Ok(file) => file,
         Err(error) => {
-            eprintln!("Something went wrong: {error:?}");
+            eprintln!("Something went wrong opening: {error:?}");
             process::exit(1);
         }
     };
 
-    println!("{file:#?}");
+    let mut file_contents = String::new();
+    let read_operation = file.read_to_string(&mut file_contents);
+
+    if let Err(error) = read_operation {
+        eprintln!("Something went wrong reading: {error}");
+        process::exit(1);
+    }
+
+    println!("{file_contents}");
     /*
     println!("Some status update");
     // std error with "$ cargo run > error.txt"
