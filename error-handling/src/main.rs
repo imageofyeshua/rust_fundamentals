@@ -2,6 +2,14 @@ use std::io::{self, stdin};
 use std::fs;
 
 fn main() {
+    let mut animals = vec!["Giraffe", "Monkey", "Zebra"];
+
+    println!("{:?}", length_of_last_element(&mut animals));
+    println!("{:?}", length_of_last_element(&mut animals));
+    println!("{:?}", length_of_last_element(&mut animals));
+    println!("{:?}", length_of_last_element(&mut animals));
+
+    /*
     let file_result = read_file();
 
     match file_result {
@@ -10,7 +18,6 @@ fn main() {
             eprintln!("There was an error: {error:?}");
         }
     }
-    /*
     println!("Some status update");
     // std error with "$ cargo run > error.txt"
     eprintln!("Some error message");
@@ -18,6 +25,11 @@ fn main() {
     process::exit(1);
     println!("This will not print");
     */
+}
+
+fn length_of_last_element(input: &mut Vec<&str>) -> Option<usize> {
+    let last_element = input.pop()?;
+    Some(last_element.len())
 }
 
 fn read_file() -> Result<String, io::Error> {
