@@ -1,50 +1,28 @@
-use std::io::{self, stdin};
 use std::fs;
+use std::io;
+use std::process;
 
 fn main() {
-    let mut animals = vec!["Giraffe", "Monkey", "Zebra"];
-
-    println!("{:?}", length_of_last_element(&mut animals));
-    println!("{:?}", length_of_last_element(&mut animals));
-    println!("{:?}", length_of_last_element(&mut animals));
-    println!("{:?}", length_of_last_element(&mut animals));
-
-    /*
-    let file_result = read_file();
-
-    match file_result {
-        Ok(contents) => println!("{contents}"),
+    match write_to_file() {
+        Ok(file_name) => println!("Successfully wrote to file {file_name}"),
         Err(error) => {
-            eprintln!("There was an error: {error:?}");
+            eprintln!("There was an error: {error}");
+            process::exit(1)
         }
     }
-    println!("Some status update");
-    // std error with "$ cargo run > error.txt"
-    eprintln!("Some error message");
-    panic!("Something went wrong!");
-    process::exit(1);
-    println!("This will not print");
-    */
 }
 
-fn length_of_last_element(input: &mut Vec<&str>) -> Option<usize> {
-    let last_element = input.pop()?;
-    Some(last_element.len())
-}
+fn write_to_file() -> io::Result<String> {
+    let input = io::stdin();
+    println!("What file would you like to write to?");
+    let mut requested_file = String::new();
+    input.read_line(&mut requested_file)?;
 
-fn read_file() -> Result<String, io::Error> {
-    println!("Please enter the name of the file:");
+    println!("What would you like to write to the file?");
+    let mut content = String::new();
+    input.read_line(&mut content)?;
 
-    let mut input = String::new();
-    stdin().read_line(&mut input)?;
+    fs::write(requested_file.trim(), content.trim())?;
 
-    fs::read_to_string(input.trim())
-
-    // above fs read_to_string function does below exactly
-    /*
-    let mut file_contents = String::new();
-    File::open(input.trim())?.read_to_string(&mut file_contents)?;
-    
-    Ok(file_contents)
-    */
+    Ok(requested_file) 
 }
