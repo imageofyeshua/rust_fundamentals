@@ -1,6 +1,5 @@
-use std::process;
-use std::io::{self, stdin, Read};
-use std::fs::File;
+use std::io::{self, stdin};
+use std::fs;
 
 fn main() {
     let file_result = read_file();
@@ -27,10 +26,13 @@ fn read_file() -> Result<String, io::Error> {
     let mut input = String::new();
     stdin().read_line(&mut input)?;
 
-    let mut file = File::open(input.trim())?;
+    fs::read_to_string(input.trim())
 
+    // above fs read_to_string function does below exactly
+    /*
     let mut file_contents = String::new();
-    file.read_to_string(&mut file_contents)?;
+    File::open(input.trim())?.read_to_string(&mut file_contents)?;
     
     Ok(file_contents)
+    */
 }
