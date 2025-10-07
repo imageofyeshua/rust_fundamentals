@@ -23,25 +23,14 @@ fn main() {
 
 fn read_file() -> Result<String, io::Error> {
     println!("Please enter the name of the file:");
+
     let mut input = String::new();
+    stdin().read_line(&mut input)?;
 
-    let user_requested_file = stdin().read_line(&mut input);
-
-    if let Err(error) = user_requested_file {
-        return Err(error);
-    }
-
-    let mut file = match File::open(input.trim()) {
-        Ok(file) => file,
-        Err(error) => return Err(error),
-    };
+    let mut file = File::open(input.trim())?;
 
     let mut file_contents = String::new();
-    let read_operation = file.read_to_string(&mut file_contents);
-
-    if let Err(error) = read_operation {
-        return Err(error);
-    }
+    file.read_to_string(&mut file_contents)?;
     
     Ok(file_contents)
 }
