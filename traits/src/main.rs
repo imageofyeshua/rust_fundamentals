@@ -79,11 +79,14 @@ fn mix_and_match<T, U>(first: &mut T, second: &mut U, guest: &str)
     second.book(guest, 1);
 }
 
+fn choose_best_place_to_stay() ->  impl Accommodation + Description {
+    Hotel::new("Hanok")
+}
+
 fn main() {
-    let mut hotel = Hotel::new("The Luxe");
+    let mut hotel = choose_best_place_to_stay();
     let mut airbnb = AirBnB::new("Peter");
     mix_and_match(&mut hotel, &mut airbnb, "Piers");
-    println!("{hotel:#?} {airbnb:#?}");
 
     /*
     let mut hotel = Hotel::new("The Luxe");
