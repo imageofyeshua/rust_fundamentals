@@ -1,4 +1,5 @@
-use traits::{book_for_one_night, mix_and_match, AirBnB, Hotel, Accommodation, Description};
+use traits::lodging::{Hotel, AirBnB, Accommodation, Description};
+use traits::utils;
 
 fn main() {
     let mut hotel = Hotel::new("The Luxe");
@@ -8,7 +9,8 @@ fn main() {
 
     let mut airbnb = AirBnB::new("Peter");
     println!("{}", airbnb.get_description());
-    airbnb.book("Piers", 3);
+    utils::book_for_one_night(&mut airbnb, "Dan");
+    utils::mix_and_match(&mut hotel, &mut airbnb, "Daniel");
     println!("{:#?}", airbnb);
     /*
     let mut hotel = Hotel::new(String::from("The Poor"));
