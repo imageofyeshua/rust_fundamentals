@@ -75,7 +75,7 @@ fn book_for_one_night<T: Accommodation + Description>(entity: &mut T, guest: &st
 // fn mix_and_match<T: Accommodation, U: Accommodation>(first: &mut T, second: &mut U, guest: &str)
 fn mix_and_match<T, U>(first: &mut T, second: &mut U, guest: &str) 
  where  T: Accommodation + Description,
-        U: Accommodation,
+    U: Accommodation,
 {
     first.book(guest, 1);
     first.get_description();
@@ -87,7 +87,22 @@ fn choose_best_place_to_stay() ->  impl Accommodation + Description {
 }
 
 fn main() {
-    
+    let mut hotel = Hotel::new(String::from("The Poor"));
+    let mut airbnb = AirBnB::new("Evil Genius");
+
+    let mut stays: Vec<&mut dyn Accommodation> = vec![&mut hotel, &mut airbnb];
+    stays[0].book("Piers", 2);
+    stays[1].book("Amanda", 3);
+
+    println!("{:#?}", hotel);
+    println!("{:#?}", airbnb);
+
+    /*
+    let stays: Vec<&dyn Description> = vec![&hotel, &airbnb];
+
+    println!("{}", stays[0].get_description());
+    println!("{}", stays[1].get_description());
+
     let hotel1 = Hotel::new(String::from("The Luxe"));
     println!("{}", hotel1.summarize());
 
@@ -97,7 +112,6 @@ fn main() {
     let hotel3 = Hotel::new(vec!("The Sweet Escape", "Hilton Hell"));
     // println!("{}", hotel3.summarize());
 
-    /*
     let mut hotel = choose_best_place_to_stay();
     let mut airbnb = AirBnB::new("Peter");
     mix_and_match(&mut hotel, &mut airbnb, "Piers");
