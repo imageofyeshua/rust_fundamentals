@@ -1,7 +1,43 @@
-use traits::lodging::{Hotel, AirBnB, Accommodation, Description};
-use traits::utils;
+// use traits::lodging::{Hotel, AirBnB, Accommodation, Description};
+// use traits::utils;
+
+trait Taxable {
+    const TAX_RATE: f64 = 0.25;
+
+    fn tax_bill(&self) -> f64;
+}
+
+#[derive(Debug)]
+struct Income {
+    amount: f64,
+}
+
+#[derive(Debug)]
+struct Bonus {
+    amount: f64
+}
+
+impl Taxable for Income {
+    fn tax_bill(&self) -> f64 {
+        self.amount * Self::TAX_RATE
+    }
+}
+
+impl Taxable for Bonus {
+    const TAX_RATE: f64 = 0.50;
+
+    fn tax_bill(&self) -> f64 {
+        self.amount * Self::TAX_RATE
+    }
+}
 
 fn main() {
+    let income = Income { amount: 50000.50 };
+    println!("Total tax owned: ${:.2}", income.tax_bill());
+
+    let bonus = Bonus { amount: 10000.23 };
+    println!("Bonus tax owned: ${:.2}", bonus.tax_bill());
+    /*
     let mut hotel = Hotel::new("The Luxe");
     println!("{}", hotel.summarize());
     hotel.book("Piers", 5);
@@ -12,7 +48,6 @@ fn main() {
     utils::book_for_one_night(&mut airbnb, "Dan");
     utils::mix_and_match(&mut hotel, &mut airbnb, "Daniel");
     println!("{:#?}", airbnb);
-    /*
     let mut hotel = Hotel::new(String::from("The Poor"));
     let mut airbnb = AirBnB::new("Evil Genius");
 
