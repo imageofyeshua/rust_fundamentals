@@ -1,0 +1,4 @@
+   Compiling catsay v0.1.0 (/home/kainos/dev/RustProjects/rust_fundamentals/catsay)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.71s
+     Running `target/debug/catsay woof`
+A cat shouldn't bark like a dog.
