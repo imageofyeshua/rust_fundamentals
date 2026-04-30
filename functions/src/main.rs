@@ -1,59 +1,47 @@
-#[allow(unused_variables)]
 fn main() {
-    open_store("Gimcheon");
-    bake_bread(12, "beans");
-    bake_bread(7, "mushroom");
+    let x = 5;
+    let x = x + 1;
+    println!("The value of x is: {}", x);
 
-    let result = square(5);
-    println!("Square result: {result}");
+    let signed_int: i32 = -42;
+    let unsigned_int: u32 = 42;
+    println!("Signed integer: {}, Unsigned integer: {}", signed_int, unsigned_int);
 
-    let outcome = cube(4);
-    println!("Cube result: {outcome}");
+    let float_num: f64 = 5.14159;
+    println!("Floating-point number: {}", float_num);
 
-    // unit
-    let achievements = mystery();
+    let is_rust_fun: bool = true;
+    println!("Is Rust fun? {}", is_rust_fun);
 
-    let multiplier = 3;
+    let letter: char = 'R';
+    let emoji: char = '😀';
 
-    // block
-    let calculation = {
-       let value = 5 + 4;
-       value * multiplier
-    };
+    println!("Letter: {}, Emoji: {}", letter, emoji);
 
-    println!("{calculation}");
+    // A tuple holding an integer, a float, and a character
+    let my_tuple: (i32, f64, char) = (500, 6.4, 'R');
 
-    println!("4 is even? {}", is_even(4));
+    // Method 1: Destructuring with a `let` binding.
+    // This is a form of pattern matching that breaks the tuple into separate variables.
+    let (x, y, z) = my_tuple;
+    println!("Destructured values: x = {}, y = {}, z = {}", x, y, z);
 
-    println!("contains 'a' || 'z' ? {:#?}", alphabets("hallo there"));
+    // Method 2: Direct access using dot notation and the element's index.
+    // Indices start from 0.
+    let first_element = my_tuple.0;
+    let second_element = my_tuple.1;
+    println!("Direct access: First element is {}, second is {}", first_element, second_element);
+
+    let input1 = 10;
+    let input2 = 5;
+
+    let (sum_result, product_result) = calculate_sum_and_product(input1, input2);
+
+    println!("For {} and {}", input1, input2);
+    println!("  Sum: {}", sum_result);
+    println!("  Product: {}", product_result);
 }
 
-fn alphabets(text: &str) -> (bool, bool) {
-    (text.contains("a"), text.contains("z"))
-}
-
-fn is_even(number: i32) -> bool {
-    number % 2 == 0
-}
-
-fn mystery() {
-    println!("Hello there!")
-}
-
-fn open_store(neighborhood: &str) {
-    println!("Opening my pancake store in {neighborhood}");
-}
-
-fn bake_bread(number: i32, fillings: &str) {
-    println!("Baking {number} loaves of {fillings} bread");
-}
-
-// explicit return
-fn square(number: i32) -> i32 {
-    return number * number;
-}
-
-// implicit return : no semicolon and the last data is returned
-fn cube(number: i32) -> i32 {
-    number * number * number
+fn calculate_sum_and_product(a: i32, b: i32) -> (i32, i32) {
+    (a + b, a * b)
 }
